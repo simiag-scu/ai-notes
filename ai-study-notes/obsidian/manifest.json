@@ -1,0 +1,9 @@
+{
+  "id": "shiye-study-notes",
+  "name": "拾页 · AI 学习笔记",
+  "version": "0.1.0",
+  "minAppVersion": "1.5.0",
+  "description": "连接本机拾页工作台，在原生编辑器内采纳 AI 草稿和原文摘录。",
+  "author": "Shiye",
+  "isDesktopOnly": true
+}

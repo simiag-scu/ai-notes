@@ -1,0 +1,7 @@
+{
+  "name": "shiye-desktop-toolchain",
+  "version": "0.2.0",
+  "private": true,
+  "dependencies": { "undici": "8.12.3" },
+  "devDependencies": { "electron": "45.0.0", "electron-builder": "26.15.3" }
+}

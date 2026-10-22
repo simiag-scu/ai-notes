@@ -1,0 +1,59 @@
+{
+  "description": "Copied verbatim from the named installed packages; no private paths or credentials.",
+  "files": [
+    {
+      "file": "Electron-LICENSE.txt",
+      "package": "electron",
+      "version": "45.0.0",
+      "license": "MIT",
+      "source": "electron@45.0.0/dist/LICENSE",
+      "repository": "https://github.com/electron/electron",
+      "sha256": "5154e165bd6c2cc0cfbcd8916498c7abab0497923bafcd5cb07673fe8480087d"
+    },
+    {
+      "file": "LICENSES.chromium.html",
+      "package": "electron",
+      "version": "45.0.0",
+      "license": "Multiple; see full text",
+      "source": "electron@45.0.0/dist/LICENSES.chromium.html",
+      "repository": "https://github.com/electron/electron",
+      "sha256": "214152f78cc0b611f63ff8faefcc6670c4605ffbff05f092bb671e6df80ce741"
+    },
+    {
+      "file": "Undici-LICENSE.txt",
+      "package": "undici",
+      "version": "8.12.3",
+      "license": "MIT",
+      "source": "undici@8.12.3/LICENSE",
+      "repository": "https://github.com/nodejs/undici",
+      "sha256": "a6db8096b2707bc0102d256917d4d33f298ba36d8c3f25de067a2b5bb379db27"
+    },
+    {
+      "file": "electron-builder-LICENSE.txt",
+      "package": "electron-builder",
+      "version": "26.15.3",
+      "license": "MIT",
+      "source": "electron-builder@26.15.3/LICENSE",
+      "repository": "https://github.com/electron-userland/electron-builder",
+      "sha256": "bed8d0ab3e6031817f775a641ff37313b0f5591bc8ba0ed79b978dafbd4231ce"
+    },
+    {
+      "file": "Playwright-LICENSE.txt",
+      "package": "playwright-core",
+      "version": "1.64.0-beta-1791568591000",
+      "license": "Apache-2.0",
+      "source": "playwright-core@1.64.0-beta-1791568591000/LICENSE",
+      "repository": "https://github.com/microsoft/playwright",
+      "sha256": "45873d00a0dd243596deb4aa23b2493b3d1f0671921bf2538ea431d7380220eb"
+    },
+    {
+      "file": "Playwright-NOTICE.txt",
+      "package": "playwright-core",
+      "version": "1.64.0-beta-1791568591000",
+      "license": "Apache-2.0",
+      "source": "playwright-core@1.64.0-beta-1791568591000/NOTICE",
+      "repository": "https://github.com/microsoft/playwright",
+      "sha256": "6d602191187b35b9b01d2cffa01c8469c2c8d9de8a96f1bf868e0f264f51c81d"
+    }
+  ]
+}

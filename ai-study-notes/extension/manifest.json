@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "拾页 · AI 学习笔记",
+  "version": "0.1.0",
+  "description": "在 ChatGPT、DeepSeek 中选取文字和图片，生成可确认的 Obsidian 学习笔记。",
+  "permissions": ["storage", "sidePanel", "contextMenus", "activeTab"],
+  "host_permissions": ["http://127.0.0.1:17861/*", "https://chatgpt.com/*", "https://chat.deepseek.com/*", "https://*.oaiusercontent.com/*", "https://*.oaistatic.com/*", "https://*.deepseek.com/*"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_title": "打开拾页学习笔记" },
+  "side_panel": { "default_path": "panel/index.html" },
+  "content_scripts": [{ "matches": ["https://chatgpt.com/*", "https://chat.deepseek.com/*"], "js": ["content.js"], "run_at": "document_idle" }],
+  "commands": { "capture-selection": { "suggested_key": { "default": "Alt+Shift+N", "mac": "Alt+Shift+N" }, "description": "加入选中的文字" } }
+}

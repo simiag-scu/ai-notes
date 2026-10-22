@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light"><title>拾页 · 学习工作台</title>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="library">
+      <a class="brand" href="#" aria-label="拾页主页"><img src="./icon.svg" alt=""><span>拾页<small>STUDY, IN YOUR WORDS.</small></span></a>
+      <button id="new-note" class="button primary full">＋ 新建学习笔记</button>
+      <div class="library-label">我的学习 <span id="note-total">0</span></div>
+      <nav id="note-list" aria-label="学习笔记列表"></nav>
+      <div class="library-bottom"><button id="settings-button" class="quiet">⚙ 连接与偏好</button><div class="local-status"><span class="status-dot"></span><span id="connection-label">正在连接本机…</span></div></div>
+    </aside>
+    <div class="mobile-switch" aria-label="工作区"><button id="show-chat" class="active">AI 对话</button><button id="show-notes">笔记与草稿</button></div>
+    <main class="chat-pane">
+      <header class="chat-header"><div><span class="eyebrow">THINK IT THROUGH</span><h1>边聊，边记。</h1></div><button id="chat-model" class="button subtle" title="选择模型或连接账号">连接 AI</button></header>
+      <div class="conversation-toolbar"><select id="chat-history" aria-label="历史对话"><option value="">新的学习对话</option></select><button id="new-chat" class="quiet">＋ 新对话</button></div>
+      <div id="chat-messages" class="chat-messages" role="log" aria-label="AI 对话" aria-live="polite"><div class="chat-welcome"><span>✳</span><h2>从一个问题开始。</h2><p>在这里与 AI 对话，选取回答里的文字，<br>留下你真正理解的部分。</p><p class="help-text">连接 ChatGPT 或 DeepSeek 后即可提问。<br>新对话独立保存，不会自动导入网页历史。</p></div></div>
+      <div id="chat-selection-bar" class="chat-selection-bar" hidden><span id="chat-selection-label">已选择回答内容</span><button id="clip-chat-selection" class="button primary small">加入笔记 ↗</button><button id="clear-chat-selection" class="quiet" aria-label="取消选取">×</button></div>
+      <div class="chat-target"><span id="chat-target-label">可先聊天，再建立笔记</span><button id="collect-chat" class="quiet">将本对话用于整理</button></div>
+      <form id="chat-form" class="chat-composer"><label class="sr-only" for="chat-input">向 AI 提问</label><textarea id="chat-input" rows="3" maxlength="50000" placeholder="问一个问题，或粘贴一段教材文字…"></textarea><div class="composer-bottom"><small id="chat-hint">Enter 发送 · Shift + Enter 换行</small><button id="stop-chat" type="button" class="button subtle" hidden>停止生成</button><button id="send-chat" type="submit" class="button primary">发送 ↑</button></div></form>
+      <p class="chat-footnote">对话和整理共用已选模型与额度 · 本轮先支持文字提问</p>
+    </main>
+    <div class="notes-pane">
+    <section class="workspace">
+      <header class="topbar"><div><span class="eyebrow">THE LEARNING DESK</span><span class="topbar-label">留住理解发生的时刻</span></div><div class="topbar-actions"><button id="jump-drafts" class="button subtle">草稿 <span id="pending-badge">0</span> ↓</button><button id="import-button" class="button subtle">＋ 加入学习片段</button></div></header>
+      <section id="welcome" class="welcome">
+        <div class="welcome-mark">拾</div><div class="eyebrow">A PLACE FOR YOUR UNDERSTANDING</div>
+        <h1>让对话，<br>长成自己的笔记。</h1><p>AI 帮你起草，你决定留下什么。<br>一份属于你的 Markdown，始终留在 Obsidian。</p>
+        <button id="welcome-new" class="button primary">开始一章新的学习 <span>↗</span></button>
+        <div class="welcome-features"><div><b>01</b><span>选取与收集</span><small>保留原文、图片与来源</small></div><div><b>02</b><span>思考与采纳</span><small>自动草稿，逐条或批量确认</small></div><div><b>03</b><span>连接与生长</span><small>普通笔记 / 思维大纲</small></div></div>
+      </section>
+      <section id="note-workspace" hidden>
+        <div class="note-heading"><div><div class="eyebrow" id="note-kind">MARKDOWN NOTE</div><h1 id="note-title"></h1><div class="note-path" id="note-path"></div></div><a id="open-obsidian" class="button subtle">在 Obsidian 打开 ↗</a></div>
+        <div class="note-toolbar"><div class="segmented" aria-label="显示方式"><button id="preview-tab" class="active">阅读预览</button><button id="source-tab">Markdown 源文</button><button id="sources-tab">采集来源 <span id="source-count">0</span></button></div><div class="toolbar-actions"><button id="copy-note" class="quiet">复制</button><button id="convert-note" class="quiet">AI 转换 ⇄</button><button id="undo-note" class="quiet">撤销写入</button></div></div>
+        <div id="preview" class="paper prose"></div>
+        <div id="source-editor" class="paper editor-wrap" hidden><div class="editor-help"><span>直接编辑 Markdown；按原文保留 Obsidian 语法。</span><button id="save-note" class="button primary small">保存修改</button></div><textarea id="editor" spellcheck="false" aria-label="Markdown 源文"></textarea></div>
+        <div id="source-cards" class="paper" hidden></div>
+        <footer class="note-footer"><span id="save-state">已保存在本机</span><span id="word-count"></span></footer>
+      </section>
+    </section>
+    <aside class="draft-rail">
+      <div class="draft-heading"><div><span class="eyebrow">YOUR SECOND PAIR OF HANDS</span><h2>待确认草稿 <span id="draft-count">0</span></h2></div><span class="spark">✳</span></div>
+      <div class="auto-control"><label class="switch"><input id="auto-summary" type="checkbox"><span></span></label><div><b>自动整理</b><small>新对话生成草稿，等你确认</small></div></div>
+      <div class="draft-tools"><button id="summarize" class="button subtle">整理新增对话</button><button id="stop-job" class="quiet" hidden>停止</button></div>
+      <div id="job-status" class="job-status" hidden></div>
+      <div class="bulk-actions"><label><input id="select-all" type="checkbox"> 全选</label><button id="accept-selected" class="quiet">采纳选中</button><button id="reject-selected" class="quiet">忽略</button></div>
+      <div id="draft-list" class="draft-list"><div class="draft-empty"><span>✧</span><h3>把整理交给 AI，<br>把判断留给自己。</h3><p>新建笔记后，连接账号并采集对话。<br>你的原文摘录也可以直接加入。</p></div></div>
+      <div class="usage-card"><div><span>今日 AI 用量</span><b id="usage-number">0</b></div><div class="usage-track"><span id="usage-meter"></span></div><small id="usage-description">统计本工具的聊天与整理请求</small></div>
+    </aside>
+    </div>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <dialog id="edit-dialog" class="edit-dialog"><div class="dialog-kicker">REFINE WHAT YOU KEEP</div><h2 id="edit-title">AI 处理选区</h2><p id="edit-target" class="help-text"></p><p id="edit-status" role="status">正在处理…</p><div class="edit-comparison"><section><h3>所选原文</h3><pre id="edit-original"></pre></section><section><div class="edit-result-heading"><h3>处理结果</h3><button id="edit-toggle-source" class="quiet">编辑 Markdown 结果</button></div><div id="edit-rendered" class="prose"></div><textarea id="edit-result" spellcheck="false" aria-label="AI 处理后的 Markdown" hidden></textarea></section></div><p id="edit-error" class="auth-notice" role="alert" hidden></p><p class="help-text">确认后写入当前笔记模式，可撤销。原文与结果可在这里核对。</p><div class="dialog-actions"><button id="edit-cancel" class="quiet">取消 / 停止</button><button id="edit-retry" class="button subtle" hidden>重新处理</button><button id="edit-apply" class="button primary" disabled>确认写入</button></div></dialog>
+  <dialog id="new-dialog"><form id="new-form"><div class="dialog-kicker">A NEW CHAPTER</div><h2>这一章，想学什么？</h2><label>笔记名称<input id="new-title" name="title" placeholder="例如：第六章 · 循环系统" required maxlength="100" autocomplete="off"></label><fieldset><legend>选择笔记模式</legend><label class="mode-option"><input type="radio" name="mode" value="markdown" checked><span><b>普通 Markdown</b><small>标题、段落与图文，适合完整阅读</small></span><span class="mode-glyph">Aa</span></label><label class="mode-option"><input type="radio" name="mode" value="outline"><span><b>大纲 Markdown</b><small>严格的 - 层级节点，可复制到幕布</small></span><span class="mode-glyph">☷</span></label></fieldset><div class="dialog-actions"><button type="button" class="quiet" data-close>取消</button><button class="button primary" type="submit">建立笔记</button></div></form></dialog>
+  <dialog id="import-dialog"><form id="import-form"><div class="dialog-kicker">COLLECT A THOUGHT</div><h2>加入学习片段</h2><label>片段内容<textarea id="import-text" rows="8" placeholder="粘贴你想留下的文字、Markdown，或一段待整理的 AI 回答。"></textarea></label><label>来源链接（可选）<input id="import-url" type="url" placeholder="https://…"></label><label>或选择图片<input id="import-image" type="file" accept="image/png,image/jpeg,image/webp,image/gif"></label><label class="checkline"><input id="import-direct" type="checkbox" checked> 原文直接加入笔记，不调用 AI</label><div class="dialog-actions"><button type="button" class="quiet" data-close>取消</button><button type="submit" class="button primary">加入当前笔记</button></div></form></dialog>
+  <dialog id="settings-dialog" class="settings-dialog"><div class="dialog-kicker">MAKE YOURSELF AT HOME</div><h2>连接与偏好</h2><div class="settings-tabs"><button data-settings="account" class="active">AI 与用量</button><button data-settings="connection">浏览器与 Obsidian</button></div>
+    <section id="settings-account"><div class="account-card"><div><b id="account-label">尚未连接 ChatGPT</b><p id="account-description">通过官方页面登录，授权使用现有套餐。</p></div><button id="connect-chatgpt" class="button primary">Continue with ChatGPT</button><button id="disconnect-chatgpt" class="quiet" hidden>断开连接</button></div><p class="help-text">保存模型后，可直接在工作台左侧聊天。聊天与整理都会消耗所选服务的额度。现有网页历史可通过扩展另外采集。</p>
+      <form id="settings-form"><label>模型服务<select id="provider"><option value="chatgpt">ChatGPT 套餐授权（优先）</option><option value="openai">OpenAI API（单独计费）</option><option value="deepseek">DeepSeek API（单独计费）</option></select></label><div class="field-row"><label>模型<input id="model" list="model-options" placeholder="连接后读取可用模型"><datalist id="model-options"></datalist></label><button id="load-models" type="button" class="button subtle">读取模型</button></div><label id="api-key-field" hidden>API Key<input id="api-key" type="password" autocomplete="new-password" placeholder="保存在本机，留空保持不变"></label><div class="two-fields"><label>每次上下文预算<input id="context-budget" type="number" min="1000" max="24000" step="500"></label><label>今日 token 预算<input id="daily-budget" type="number" min="5000" max="1000000" step="5000"></label></div><label>每小时最多 AI 请求次数<input id="calls-limit" type="number" min="1" max="100"></label><label>笔记输出目录（相对当前仓库）<input id="output-folder" placeholder="ai-study-notes/笔记"></label><button class="button primary" type="submit">保存偏好</button></form>
+    </section>
+    <section id="settings-connection" hidden><div class="setup-step"><b>01</b><div><h3>安装浏览器扩展</h3><p>解压扩展包，在浏览器扩展管理页开启开发者模式，加载解压后的文件夹。</p><a class="button subtle" id="download-extension" href="/downloads/shiye-extension.zip" download>下载扩展包</a></div></div><div class="setup-step"><b>02</b><div><h3>连接本机工作台</h3><p>把连接码粘贴到扩展和 Obsidian 插件的设置中。连接码只授权本机工具。</p><button id="copy-connection" class="button subtle">复制本机连接码</button><label id="extension-connection" hidden>连接码<input id="bridge-token" type="password" autocomplete="off"><button id="save-connection" class="button primary" type="button">连接工作台</button></label></div></div><div class="setup-step"><b>03</b><div><h3>启用 Obsidian 接入</h3><p>运行项目中的“安装到Obsidian.command”，再在 Obsidian 的第三方插件设置中启用「拾页」。原生连接完成后，写入通过 Obsidian 应用，保留编辑位置。</p><a class="button subtle" id="download-plugin" href="/downloads/shiye-obsidian.zip" download>下载插件包</a></div></div><p id="vault-info" class="help-text"></p><p class="help-text">当前预览只用于草稿检查；双链跳转和完整插件效果请在 Obsidian 中阅读。</p></section><div class="dialog-actions"><button class="button subtle" data-close>完成</button></div>
+  </dialog>
+  <dialog id="confirm-dialog"><form id="convert-form"><div class="dialog-kicker">ANOTHER WAY TO SEE IT</div><h2 id="convert-title">转换笔记模式</h2><p>AI 会重新组织层级与段落，默认保留知识点、图片与引用。转换结果另存，原笔记保持可用。</p><p id="convert-budget" class="help-text"></p><div class="dialog-actions"><button type="button" class="quiet" data-close>取消</button><button type="submit" class="button primary">生成另一种版本</button></div></form></dialog>
+  <script type="module" src="./app.js"></script>
+</body></html>
